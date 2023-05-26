@@ -6,7 +6,7 @@ dots () {
 }
 
 add-dots() {
-	for x in $(find . -type d); do
+	for x in $(find "$1" -type d); do
 		if [ -d "${x}/.git" ]; then
 		cd "${x}"
 		origin="$(git config --get remote.origin.url)"
