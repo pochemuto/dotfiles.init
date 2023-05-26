@@ -2,7 +2,7 @@ DOTFILES="$HOME/.dotfiles"
 DOTFILES_REPO="git@github.com:pochemuto/dotfiles.git"
 
 dots-status() {
-  dots ls-tree -rtd --format='%(path)' HEAD ./ | awk -F '/' '{print $1}' | sort | uniq | xargs git --git-dir="$DOTFILES" --work-tree="$HOME" "$@" st -u "{}" \;
+  dots ls-tree -rtd --format='%(path)' HEAD ./ | awk -F '/' '{print $1}' | sort | uniq | xargs git --git-dir="$DOTFILES" --work-tree="$HOME" "$@" st --ignore-submodules=untracked -u "{}" \;
 }
 
 dots () {
