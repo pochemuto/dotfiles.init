@@ -26,6 +26,7 @@ add-dots() {
 }
 
 new-dots () {
+  set -e
   git clone --bare $DOTFILES_REPO $DOTFILES
   dots config --local status.showUntrackedFiles no
   dots switch -c base
@@ -36,6 +37,7 @@ new-dots () {
 }
 
 restore-dots () {
+  set -e
   git clone -b base --bare $DOTFILES_REPO $DOTFILES
   dots config --local status.showUntrackedFiles no
   dots checkout  && \
