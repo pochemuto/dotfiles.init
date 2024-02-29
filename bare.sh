@@ -44,3 +44,5 @@ restore-dots () {
   dots submodule init && \
   dots submodule update || echo -e 'Deal with conflicting files, then run (possibly with -f flag if you are OK with overwriting)\ndots checkout'
 }
+
+compdef dots='git'
