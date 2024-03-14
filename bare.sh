@@ -11,7 +11,14 @@ dots () {
 }
 
 commit-dots() {
-  dots add -u && dots ci -m "$1" && dots push
+  set -e
+  local message="$1"
+  dots add -u
+  if [[ -z "$message" ]]; then 
+    message=$(dots status --porcelain)
+  fi
+  dots ci -m "$message"
+  dots push
 }
 
 add-dots() {
