@@ -11,7 +11,9 @@ dots () {
 }
 
 commit-dots() {
+  emulate -L zsh
   set -e
+  setopt err_return
   local message="$1"
   dots add -u
   if [[ -z "$message" ]]; then 
@@ -33,7 +35,9 @@ add-dots() {
 }
 
 new-dots () {
+  emulate -L zsh
   set -e
+  setopt err_return
   git clone --bare $DOTFILES_REPO $DOTFILES
   dots config --local status.showUntrackedFiles no
   dots switch -c base
@@ -44,7 +48,9 @@ new-dots () {
 }
 
 restore-dots () {
+  emulate -L zsh
   set -e
+  setopt err_return
   git clone -b base --bare $DOTFILES_REPO $DOTFILES
   dots config --local status.showUntrackedFiles no
   dots checkout  && \
