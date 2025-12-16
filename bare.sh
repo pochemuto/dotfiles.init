@@ -1,16 +1,16 @@
 DOTFILES="$HOME/.dotfiles"
 DOTFILES_REPO="git@github.com:pochemuto/dotfiles.git"
 
-dots-status() {
+dots-status() {(
   dots ls-tree -rtd --format='%(path)' HEAD ./ | awk -F '/' '{print $1}' | sort | uniq | xargs git --git-dir="$DOTFILES" --work-tree="$HOME" "$@" st --ignore-submodules=untracked -u "{}" \;
   dots st
-}
+)}
 
-dots () {
+dots () {(
   git --git-dir="$DOTFILES" --work-tree="$HOME" "$@"
-}
+)}
 
-commit-dots() {
+commit-dots() {(
   emulate -L zsh
   set -e
   setopt err_return
@@ -21,9 +21,9 @@ commit-dots() {
   fi
   dots ci -m "$message"
   dots push
-}
+)}
 
-add-dots() {
+add-dots() {(
 	for x in $(find "$1" -type d); do
 		if [ -d "${x}/.git" ]; then
 		cd "${x}"
@@ -32,9 +32,9 @@ add-dots() {
 		dots submodule add "${origin}" "${x}"
 		fi
 	done
-}
+)}
 
-new-dots () {
+new-dots () {(
   emulate -L zsh
   set -e
   setopt err_return
@@ -45,9 +45,9 @@ new-dots () {
   echo "Please add and commit additional files"
   echo "using 'dots add' and 'dots commit', then run"
   echo "dots push -u origin base"
-}
+)}
 
-restore-dots () {
+restore-dots () {(
   emulate -L zsh
   set -e
   setopt err_return
@@ -56,6 +56,6 @@ restore-dots () {
   dots checkout  && \
   dots submodule init && \
   dots submodule update || echo -e 'Deal with conflicting files, then run (possibly with -f flag if you are OK with overwriting)\ndots checkout'
-}
+)}
 
 compdef dots='git'
